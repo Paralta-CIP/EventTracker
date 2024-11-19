@@ -1,0 +1,1 @@
+pyinstaller --noconfirm --onedir --console --add-data "D:\Programming\Python Works\event\config.ini;." --add-data "D:\Programming\Python Works\event\help;help/"  "D:\Programming\Python Works\event\main.py"

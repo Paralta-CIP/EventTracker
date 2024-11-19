@@ -1,0 +1,21 @@
+commands:
+ - <cyan>new event [name]<end> Create a new event.
+ - <cyan>delete event [name]<end> Delete an event.
+ - <cyan>rename event [old_name] [new_name]<end> Rename an event.
+ - <cyan>all event<end> View all the event created.
+ - <cyan>add [name] [date] <value><end> Add a data to an event.
+ - <cyan>edit date [name] [old_date] [new_date]<end> Change the date of a data.
+ - <cyan>edit value [name] [date] [new_value]<end> Change the value of a data.
+ - <cyan>remove [name] [date]<end> Remove a data.
+ - <cyan>view [name] <date_start> <date_end><end> View the data in optional date range.
+ - <cyan>plot frequency [name] <date_start> <date_end><end> Plot the frequency of an event on month.
+ - <cyan>plot interval [name] <date_start> <date_end><end> Plot the date interval between data of an event.
+ - <cyan>settings<end> Open the settings.
+ - <cyan>exit<end> Exit the software.
+ arguments:
+ -- <lime>[]<end> Required argument.
+ -- <lime><><end> Optional argument.
+ -- <lime>name<end> Name of the event.
+ -- <lime>date<end> Date of the data.
+ -- <lime>value<end> Value of a data.
+ -- <lime>data_start, data_end<end> Data range when searching. If one of them is empty, use -. If both are empty, omit the both.
