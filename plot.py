@@ -8,7 +8,7 @@ def plot_freq(data:list,name:str):
     df['amount'] = 1
     df[0] = pd.to_datetime(df[0])
     df = df.resample('ME',on=0).sum()
-    ax = plt.subplots()[1]
+    _, ax = plt.subplots()
     ax.xaxis.set_major_locator(mdates.MonthLocator())
     ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m'))
     plt.title(f"{name} frequency of each month")

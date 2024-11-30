@@ -1,11 +1,11 @@
 __program__ = 'EventRecorder'
 __author__ = 'Paralta'
-__version__ = '1.1.0'
+__version__ = '1.1.1'
 
 import os
 import traceback
 
-from paraltatools import printc
+from paraltatools.utils import printc
 
 import plot
 import settings
@@ -21,11 +21,14 @@ def view_format(data):
             print(i[0])
 
 
+current_path = os.path.dirname(__file__)
+os.chdir(current_path)
+
 os.system('')
 print(f'{__program__} (version {__version__}) launched.')
 
-storage = storage.Storage()
 settings = settings.Settings()
+storage = storage.Storage()
 
 print("Type 'help' for command list.")
 
