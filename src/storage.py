@@ -1,8 +1,9 @@
 import sqlite3 as sq
 
+
 class Storage:
     def __init__(self):
-        self.conn = sq.connect('data.db')
+        self.conn = sq.connect('../data.db')
         self.cursor = self.conn.cursor()
 
     def end(self):
@@ -67,12 +68,3 @@ class Storage:
         else:
             self.cursor.execute(f"select date,value from {name} order by date(date)")
             return self.cursor.fetchall()
-
-if __name__ == '__main__':
-    sto = Storage()
-    # sto.add('test3','2024-11-1')
-
-    # sto.cursor.execute('select date(date) from test3 order by date(date)')
-    # print(sto.cursor.fetchall())
-    print(sto.get('test'))
-    sto.end()

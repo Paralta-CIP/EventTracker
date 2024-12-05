@@ -1,29 +1,16 @@
 __program__ = 'EventRecorder'
 __author__ = 'Paralta'
-__version__ = '1.1.1'
+__version__ = '1.1'
 
 import os
 import traceback
-
-from paraltatools.utils import printc
-
-import plot
-import settings
-import storage
+from src import plot, settings, storage
+from src.utils import printc, view_format
 
 
-def view_format(data):
-    if data[0][1]:
-        for i in data:
-            print(i[0], i[1])
-    else:
-        for i in data:
-            print(i[0])
-
-
+# Initialization
 current_path = os.path.dirname(__file__)
 os.chdir(current_path)
-
 os.system('')
 print(f'{__program__} (version {__version__}) launched.')
 
@@ -32,6 +19,7 @@ storage = storage.Storage()
 
 print("Type 'help' for command list.")
 
+# Main loop
 while True:
     s = input('>>').strip().lower()
 
