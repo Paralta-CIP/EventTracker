@@ -12,6 +12,7 @@ class Settings:
     def initialize(self):
         self.config["settings"] = {
             "language":"English",
+            "path":".\\data.db"
         }
         with open("../config.ini", "w") as configfile:
             self.config.write(configfile)
@@ -27,5 +28,5 @@ class Settings:
     def set_settings(self, setting: str, value: str):
         self.config.read("config.ini")
         self.config.set("settings", setting, value)
-        with open('../config.ini', 'w') as configfile:
+        with open('.\\config.ini', 'w') as configfile:
             self.config.write(configfile)

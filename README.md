@@ -2,4 +2,4 @@
 Author: Paralta  
 Version: 1.1.1  
 
-Store daily data. Plot chart.
+Store daily event data. Plot chart by frequency of interval.
