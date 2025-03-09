@@ -1,5 +1,5 @@
 # Event Recorder
 Author: Paralta  
-Version: 1.2 
+Version: 1.2.1
 
-Store daily event data. Plot chart by frequency of interval.
+Python-based recurring event recorder. Store, view, edit data. Plot charts to discover data pattern.
