@@ -1,11 +1,11 @@
 from configparser import ConfigParser
 
+
 # noinspection PyTypeChecker
 class Settings:
     """
     Settings manager.
     """
-
     def __init__(self):
         self.config = ConfigParser()
 

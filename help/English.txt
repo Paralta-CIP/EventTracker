@@ -16,5 +16,4 @@ commands:
  -- <lime><><end> Optional argument.
  -- <lime>name<end> Name of the event.
  -- <lime>date<end> Date of the data.
- -- <lime>value<end> Value of a data.
  -- <lime>data_start, data_end<end> Data range when searching. If one of them is empty, use -. If both are empty, omit the both.
