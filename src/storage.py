@@ -43,7 +43,7 @@ class Storage:
     @log
     def new_event(self, name):
         self.cursor.execute(f'create table {name} (id integer primary key AUTOINCREMENT,'
-                            'date TEXT,'
+                            'date TEXT UNIQUE,'
                             'value integer)')
         self.conn.commit()
 
@@ -60,7 +60,7 @@ class Storage:
     @log
     def add(self, name, date, value: int = None):
         if value:
-            self.cursor.execute(f"insert into {name} (date,value) values (?,?)", (date, value))
+            self.cursor.execute(f"insert into {name} (date,value) values (?, ?)", (date, value))
         else:
             self.cursor.execute(f"insert into {name} (date) values (?)", (date,))
         self.conn.commit()
@@ -77,6 +77,9 @@ class Storage:
 
     @log
     def remove(self, name, date):
+        self.cursor.execute(f"select * from {name} where date=?", (date,))
+        if not self.cursor.fetchall():
+            return 101
         self.cursor.execute(f"delete from {name} where date=?", (date,))
         self.conn.commit()
 

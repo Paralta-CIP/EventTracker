@@ -14,6 +14,6 @@ commands:
  arguments:
  -- <lime>[]<end> Required argument.
  -- <lime><><end> Optional argument.
- -- <lime>name<end> Name of the event.
+ -- <lime>name<end> Name of the event. Only alphanumeric characters and _, but not start with number.
  -- <lime>date<end> Date of the data.
  -- <lime>data_start, data_end<end> Data range when searching. If one of them is empty, use -. If both are empty, omit the both.

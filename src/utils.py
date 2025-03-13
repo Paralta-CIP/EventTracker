@@ -26,8 +26,12 @@ def operation(cmd:str, pattern:str, info:str, query:Callable):
     print(info, "(Y/Enter)")
     c = input('>').upper()
     if c == 'Y':
-        query(*args)
-        printc('lime', 'Successful.')
+        response = query(*args)
+        # If remove nothing
+        if response == 101:
+            printc('red', "No such date.")
+        else:
+            printc('lime', 'Successful.')
 
 def get_data(cmd:str, cmd_name:str, get_method:Callable):
     """
@@ -38,13 +42,13 @@ def get_data(cmd:str, cmd_name:str, get_method:Callable):
     :return: Data and the name for plotting.
     """
     # Without date range.
-    matched = match(r'^'+cmd_name+r'\s+(\w+)$', cmd)
+    matched = match(r'^'+cmd_name+r'\s+([A-Za-z_]\w*)$', cmd)
     if matched:
         name = matched.group(1)
         return get_method(name), name
     # With date range.
     else:
-        matched = match(r'^'+cmd_name+r'\s+(\w+)\s+(\d{4}-\d{2}-\d{2}|-)\s+(\d{4}-\d{2}-\d{2}|-)$', cmd)
+        matched = match(r'^'+cmd_name+r'\s+([A-Za-z_]\w+)\s+(\d{4}-\d{2}-\d{2}|-)\s+(\d{4}-\d{2}-\d{2}|-)$', cmd)
         if matched:
             name, date_start, date_end = matched.groups()
             return get_method(name, date_start, date_end), name
