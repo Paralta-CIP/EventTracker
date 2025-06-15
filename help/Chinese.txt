@@ -3,18 +3,20 @@
  - <cyan>delete event [事件名]<end> 删除事件。
  - <cyan>rename event [旧事件名] [新事件名]<end> 重命名事件。
  - <cyan>all event<end> 查看现有的事件列表。
- - <cyan>add [事件名] [日期]<end> 在某个事件中添加新的数据。
- - <cyan>edit [事件名] [旧的日期] [新的日期]<end> 更改某个数据的日期。
+ - <cyan>add [事件名] [日期]<end> 在一个事件中添加新的数据。
+ - <cyan>edit [事件名] [旧日期] [新日期]<end> 更改一个数据的日期。
  - <cyan>remove [事件名] [日期]<end> 删除一个数据。
- - <cyan>view [事件名]<end> 查看某个事件的所有数据。
- - <cyan>plot frequency [事件名]<end> 按某事件每月发生的频率绘制折线图。
- - <cyan>plot interval [事件名]<end> 按某事件两次发生的间隔时间绘制折线图。
+ - <cyan>view [事件名]<end> 查看一个事件的所有数据。
+ - <cyan>avg freq [事件名]<end> 统计一个事件每月发生的平均频率。
+ - <cyan>avg int [事件名]<end> 统计一个时间两次发生的平均间隔。
+ - <cyan>plot freq [事件名]<end> 按一个事件每月发生的频率绘制折线图。
+ - <cyan>plot int [事件名]<end> 按一个事件两次发生的间隔时间绘制折线图。
  - <cyan>settings<end> 打开设置。
  - <cyan>exit<end> 退出软件。
  注意：
  - 参数周围的中括号仅作为标注，输入时不要打出。
  - 事件名中英皆可。
- - 日期格式为YYYY-MM-DD。月和日为一位数时，前需补0。 示例：2024-11-19， 2024-07-01
+ - 日期格式为YYYY-MM-DD。月和日为一位数时，前需补0。示例：2024-11-19， 2024-07-01
  示例：
  - new event 跑步
  - add 跑步 2024-11-18

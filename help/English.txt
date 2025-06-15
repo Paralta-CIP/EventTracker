@@ -6,11 +6,13 @@ commands:
  - <cyan>add [name] [date] <value><end> Add a data to an event.
  - <cyan>edit [name] [old_date] [new_date]<end> Change the date of a data.
  - <cyan>remove [name] [date]<end> Remove a data.
- - <cyan>view [name] <date_start> <date_end><end> View the data in optional date range.
- - <cyan>plot frequency [name] <date_start> <date_end><end> Plot the frequency of an event on month.
- - <cyan>plot interval [name] <date_start> <date_end><end> Plot the date interval between data of an event.
+ - <cyan>view [name] <date_start> <date_end><end> View the data.
+ - <cyan>avg freq [name] <date_start> <date_end><end> Calculate the average frequency on month of an event.
+ - <cyan>avg int [name] <date_start> <date_end><end> Calculate the average interval of an event.
+ - <cyan>plot freq [name] <date_start> <date_end><end> Plot the frequency of an event on month.
+ - <cyan>plot int [name] <date_start> <date_end><end> Plot the date interval between data of an event.
  - <cyan>settings<end> Open the settings.
- - <cyan>exit<end> Exit the software.
+ - <cyan>exit<end> Exit the software. Please always use this to exit.
  arguments:
  -- <lime>[]<end> Required argument.
  -- <lime><><end> Optional argument.

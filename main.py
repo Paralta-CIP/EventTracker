@@ -12,7 +12,10 @@ from src import plot
 from src.settings import Settings
 from src.storage import Storage
 from src.utils import printc, view_format, operation, get_data
+from src.stat import avg_freq, avg_int
 
+# TODO: Check legality of date.
+# TODO: Automatically delete log.
 
 # Initialization
 current_path = os.path.dirname(__file__)
@@ -24,7 +27,7 @@ path = settings.read_one_setting('path')
 storage = Storage(path, dev=__dev__)
 
 print(f'{__program__} (version {__version__}) launched.')
-print("Type 'help' for command list.")
+print('Type "help" for command list.')
 
 # Main loop
 while True:
@@ -65,19 +68,41 @@ while True:
             operation(cmd, r'^remove\s+([A-Za-z_]\w*)\s+(\d{4}-\d{2}-\d{2})$', "Remove % for %?", storage.remove)
 
         elif cmd.startswith('view'):
-            data, _ = get_data(cmd, 'view', storage.get)
+            data, name = get_data(cmd, 'view', storage.get)
             if data:
                 view_format(data)
+            elif name:
+                printc('orange', 'Data is empty.')
 
-        elif cmd.startswith('plot frequency'):
-            data, name = get_data(cmd, 'plot frequency', storage.get)
+        elif cmd.startswith('avg freq'):
+            data, name = get_data(cmd, 'avg freq', storage.get)
+            if data:
+                result = avg_freq(data)
+                print(f'Event "{name}" occurs {result} times a month on average.')
+            elif name:
+                printc('orange', 'Data is empty.')
+
+        elif cmd.startswith('avg int'):
+            data, name = get_data(cmd, 'avg int', storage.get)
+            if data:
+                result = avg_int(data)
+                print(f'Event "{name}" occurs every {result} days on average.')
+            elif name:
+                printc('orange', 'Data is empty.')
+
+        elif cmd.startswith('plot freq'):
+            data, name = get_data(cmd, 'plot freq', storage.get)
             if data:
                 plot.plot_freq(data, name)
+            elif name:
+                printc('orange', 'Data is empty.')
 
-        elif cmd.startswith('plot interval'):
-            data, name = get_data(cmd, 'plot interval', storage.get)
+        elif cmd.startswith('plot int'):
+            data, name = get_data(cmd, 'plot int', storage.get)
             if data:
                 plot.plot_int(data, name)
+            elif name:
+                printc('orange', 'Data is empty.')
 
         elif cmd == 'help':
             language = settings.read_one_setting('language')
@@ -94,7 +119,7 @@ while True:
             print("Current settings:")
             for cmd in current_settings:
                 print(f" - {cmd[0]} : {cmd[1]}")
-            change = input("Change the settings (like 'language=English', press enter to exit):")
+            change = input('Change the settings (like "language=English", press enter to exit):')
             if not change:
                 continue
             else:

@@ -1,12 +1,31 @@
 from typing import Literal, Callable
 from re import match, sub
-import traceback
+import logging
+from functools import wraps
 
 
 COLORS = {'grey':'249', 'red':'203', 'orange':'208', 'yellow':'227', 'green':'34', 'lime':'119', 'blue':'39',
           'cyan':'86', 'purple':'99'}
 PATTERNS = {'none':'', 'line':'\033[4m', 'inv':'\033[7m'}
 
+def log(func):
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        info = f"Call : {func.__name__}("
+        # args[0] is the instance (self). len(args) == 1 means no other arg.
+        if len(args) != 1 and not kwargs:
+            info += ', '.join(str(a) for a in args[1:])
+        elif len(args) != 1 and kwargs:
+            info += (', '.join(str(a) for a in args[1:]) + ', '
+                     + ', '.join(f'{key}={val}' for key, val in kwargs.items()))
+        elif len(args) == 1 and kwargs:
+            info += ', '.join(f'{key}={val}' for key, val in kwargs.items())
+        info += ')'
+        logging.info(info)
+        return func(*args, **kwargs)
+    return wrapper
+
+@log
 def operation(cmd:str, pattern:str, info:str, query:Callable):
     """
     General query template.
@@ -22,7 +41,7 @@ def operation(cmd:str, pattern:str, info:str, query:Callable):
     args = matched.groups()
     # Confirmation
     for a in args:
-        info = sub(r"%", f"'{a}'", info, count=1)
+        info = sub(r"%", f'"{a}"', info, count=1)
     print(info, "(Y/Enter)")
     c = input('>').upper()
     if c == 'Y':
@@ -33,22 +52,22 @@ def operation(cmd:str, pattern:str, info:str, query:Callable):
         else:
             printc('lime', 'Successful.')
 
+@log
 def get_data(cmd:str, cmd_name:str, get_method:Callable):
     """
     General template for fetching data.
     :param cmd: Input command.
-    :param cmd_name: Name of the command for regex matching.
     :param get_method: Query function (Storage.get).
     :return: Data and the name for plotting.
     """
     # Without date range.
-    matched = match(r'^'+cmd_name+r'\s+([A-Za-z_]\w*)$', cmd)
+    matched = match(r'^'+cmd_name+r'[a-z]*\s+([A-Za-z_]\w*)$', cmd)
     if matched:
         name = matched.group(1)
         return get_method(name), name
     # With date range.
     else:
-        matched = match(r'^'+cmd_name+r'\s+([A-Za-z_]\w+)\s+(\d{4}-\d{2}-\d{2}|-)\s+(\d{4}-\d{2}-\d{2}|-)$', cmd)
+        matched = match(r'^'+cmd_name+r'[a-z]*\s+([A-Za-z_]\w*)\s+(\d{4}-\d{2}-\d{2}|-)\s+(\d{4}-\d{2}-\d{2}|-)$', cmd)
         if matched:
             name, date_start, date_end = matched.groups()
             return get_method(name, date_start, date_end), name
@@ -67,7 +86,7 @@ def printc(color: int | Literal['grey', 'red', 'orange', 'yellow', 'green', 'lim
         case int():
             print('\033[38;5;' + str(color) + 'm' + PATTERNS[pat], end='')
         case _:
-            raise ValueError("Wrong 'color' type")
+            raise ValueError('Wrong "color" type')
     if text:
         for t in text[:-1]:
             print(t, end=' ')
@@ -86,3 +105,4 @@ def view_format(data):
         else:
             for i in data:
                 print(i[0])
+

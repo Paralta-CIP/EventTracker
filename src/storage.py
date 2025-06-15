@@ -1,23 +1,6 @@
 import sqlite3 as sq
-import logging
-from functools import wraps
+from src.utils import log
 
-
-def log(func):
-    @wraps(func)
-    def wrapper(*args, **kwargs):
-        info = f"Call : {func.__name__}("
-        # args[0] is the instance (self). len(args) == 1 means no other arg.
-        if len(args) != 1 and not kwargs:
-            info += ', '.join(args[1:])
-        elif len(args) != 1 and kwargs:
-            info += ', '.join(args[1:]) + ', ' + ', '.join(f'{key}={val}' for key, val in kwargs.items())
-        elif len(args) == 1 and kwargs:
-            info += ', '.join(f'{key}={val}' for key, val in kwargs.items())
-        info += ')'
-        logging.info(info)
-        return func(*args, **kwargs)
-    return wrapper
 
 class Storage:
     def __init__(self, path:str, dev=False):

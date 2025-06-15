@@ -2,3 +2,5 @@
 /.venv/
 /config.ini
 /test.py
+/__pycache__/
+/.idea/

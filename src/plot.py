@@ -4,10 +4,13 @@ import pandas as pd
 
 
 def plot_freq(data: list, name: str):
+    # Resample the data on month base
     df = pd.DataFrame(data)
     df['amount'] = 1
     df[0] = pd.to_datetime(df[0])
     df = df.resample('ME', on=0).sum()
+
+    # Plot chart
     _, ax = plt.subplots()
     ax.xaxis.set_major_locator(mdates.MonthLocator())
     ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m'))
@@ -19,10 +22,13 @@ def plot_freq(data: list, name: str):
     plt.show()
 
 def plot_int(data: list, name: str):
+    # Calculate the interval
     df = pd.DataFrame(data)
     df[0] = df[1] = pd.to_datetime(df[0])
     df[1] = df[1].diff().shift(-1)
     df[1] = df[1].apply(lambda x:x.days)
+
+    # Plot chart
     ax = plt.subplots()[1]
     ax.plot(df[0], df[1], 'o-')
     plt.title(f"{name} date interval")
@@ -30,8 +36,3 @@ def plot_int(data: list, name: str):
     plt.xlabel('time')
     plt.xticks(rotation=45)
     plt.show()
-
-if __name__ == '__main__':
-    import storage
-    s = storage.Storage()
-    plot_int(s.get('test'), 'test')
