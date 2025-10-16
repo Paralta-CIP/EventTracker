@@ -1,6 +1,6 @@
 # Event Tracker
-Author: Paralta
-Version: 1.2.1
+Author: Paralta  
+Version: 1.2.1  
 Language: English, Simplified Chinese
 
 Python-based periodic event tracker. Quickly record, view, and edit event logs. Built-in simple calculations and charts help you discover event patterns.
