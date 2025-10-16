@@ -1,5 +1,6 @@
-# Event Recorder
-Author: Paralta  
+# Event Tracker
+Author: Paralta
 Version: 1.2.1
+Language: English, Simplified Chinese
 
-Python-based recurring event recorder. Store, view, edit data. Plot charts to discover data pattern.
+Python-based periodic event tracker. Quickly record, view, and edit event logs. Built-in simple calculations and charts help you discover event patterns.
